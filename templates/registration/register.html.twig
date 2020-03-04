@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container center">
+        <h1>Inscription</h1>
+        {{ form_start(registrationForm, {'attr': {'class': 'row'}}) }}
+            <div class="input-field col s12 m6 l6 offset-m6 offset-l6">
+                {{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Adresse email'}}) }}
+                <span class="error">{{ form_errors(registrationForm.email) }}</span>
+            </div><br>
+            <div class="input-field col s12 m6 l6 offset-m6 offset-l6">
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
+                <span class="error">{{ form_errors(registrationForm.plainPassword) }}</span>
+            </div>
+            <div class="input-field col s12 m6 l6 offset-m6 offset-l6">
+                <label for="">agree Terms</label>
+                {{ form_widget(registrationForm.agreeTerms)}}
+                <span class="error">{{ form_errors(registrationForm.agreeTerms) }}</span>
+            </div>
+            <div class="input-field col s12 col s12 m6 l6 offset-m6 offset-l6">
+                <input type="submit" name="" class="btn btn-primary" value="M'inscrire">
+            </div>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

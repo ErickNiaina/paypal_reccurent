@@ -1,0 +1,52 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: md5
+            encode_as_base64: false
+            iterations:       1
+    providers:
+        in_memory: { memory: null }
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: email #champ qui permet de se connecter 
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+
+            provider: in_database
+
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: /test
+                
+            
+            logout:
+                path: app_logout
+                target: /login
+            guard:
+                authenticators:
+                    - App\Security\AppLoginAuthenticator
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        #- { path: '^/admin', roles: ROLE_USER_HOST, allow_if: "'openflex.admin' == request.getHost()" }
+        # - { path: ^/admin, roles: ROLE_USER_IP , ip: 192.168.1.1}
+        # - { path: '^/admin', roles: ROLE_USER_IP , ip: 127.0.0.1 }
+        # - { path: '^/admin', roles: ROLE_USER_PORT, ip: 127.0.0.1, port: 8080 }
+        # - { path: '^/admin', roles: ROLE_USER_METHOD, methods: [POST, PUT] }
+        
+        
+        
+        

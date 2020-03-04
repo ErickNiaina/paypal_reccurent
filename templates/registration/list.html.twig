@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Liste des Utilisateurs</h1></br></br>
+                        <table id="abonnement" class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>ApiKey</th>
+                            </tr>
+                            </thead>
+                             <tbody>
+                                {% for liste in list %}
+                                    <tr>
+                                        <td>{{liste.id}}</td>
+                                        <td>{{liste.email}}</td>
+                                        <td>{{liste.password}}</td>
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                        </table>             
+{% endblock %}

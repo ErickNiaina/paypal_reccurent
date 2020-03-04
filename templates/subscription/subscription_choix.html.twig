@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choix d'abonnement{% endblock %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% if endSubscription is defined and endSubscription is not null %}
+            <h2>Bravo!!!</h2>
+            <p><b>Vous êtes dejà abonné .</b></p>
+            <p><i>Votre compte se termine le <b>{{endSubscription|date('Y/m/d H:i')}}</b></i></p>
+
+            {% if userSubscribe.getProfileId() %}
+                <p>Votre abonnement est actif</p>
+            {% endif %}
+
+            <p><a href="{{ path('subscription_canceled', {'canceled': 1}) }}" class="btn btn-danger">Se désabonner</a></p>
+            
+        {% else %}
+            <h2><b>S'abonner</b></h2>
+            <form action="{{path('payment_paypal')}}" method="POST">
+                {% for key,value in offer  %}
+                    <li><input type="radio" name="offer" value="{{key}}">{{value.name}} - {{value.price_text}}</li>
+                {% endfor %}
+                <button class="btn btn-primary">S'abonner</button>
+            </form>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
